@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bíblia Sagrada Frei Gilson — Artes da Fé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243460;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f9f6f0;
+      --white: #fff;
+      --text: #1a1a1a;
+      --muted: #777;
+      --border: #e5e0d8;
+      --green: #2e7d5e;
+      --red: #c0392b;
+      --radius: 6px;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ══ COUPON BAR ══ */
+    .coupon-bar {
+      background: var(--navy);
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      letter-spacing: .5px;
+    }
+
+    .coupon-bar strong { color: var(--gold-light); }
+
+    /* ══ HEADER ══ */
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .hamburger {
+      font-size: 20px;
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    /* LOGO — troque a div por: <img src="images/logo.png" style="height:32px;"> */
+    .logo-ph {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: .3px;
+    }
+
+    .logo-ph .logo-icon {
+      width: 28px; height: 28px;
+      border: 2px dashed var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      /* Troque por: <img src="images/logo-icon.png" style="height:28px;"> */
+    }
+
+    .cart-icon {
+      font-size: 20px;
+      color: var(--navy);
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* ══ PRODUTO ══ */
+    .product-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--white);
+    }
+
+    /* ══ CARROSSEL ══ */
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #f5f2ec;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform .4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SLIDE PH — troque por <img src="images/biblia-1.jpg" style="width:100%;height:100%;object-fit:contain;padding:20px;"> */
+    .slide-ph {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+      border: 2px dashed #ddd;
+    }
+    .slide-ph .sn { font-size: 48px; font-weight: 900; color: #ddd; }
+    .slide-ph .sl { font-size: 11px; color: #bbb; font-weight: 700; }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.85);
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.15);
+      color: var(--navy);
+      z-index: 10;
+    }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    /* THUMBNAILS */
+    .thumbs {
+      display: flex;
+      gap: 8px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .thumb {
+      width: 56px; height: 56px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      background: #f5f2ec;
+      flex-shrink: 0;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #bbb; font-weight: 700;
+      transition: border-color .2s;
+      /* Troque por: <img src="images/thumb-X.jpg" style="width:100%;height:100%;object-fit:cover;"> */
+    }
+
+    .thumb.active { border-color: var(--navy); }
+
+    /* ══ INFO ══ */
+    .product-info {
+      padding: 16px 14px 0;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .rating-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .rating-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 1px;
+      font-size: 14px;
+      color: var(--gold);
+    }
+
+    .rating-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .rating-divider {
+      width: 1px; height: 30px;
+      background: var(--border);
+    }
+
+    .satisfied-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .satisfied-num {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .satisfied-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .demand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff4e5;
+      border: 1.5px solid #f5c842;
+      color: #b8860b;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .product-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ══ PREÇO ══ */
+    .price-section {
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .economy-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .price-main {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .price-old {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .pix-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e8f5e9;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+
+    .quote-box {
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* ══ ESCOLHA EXPERIÊNCIA ══ */
+    .experience-section {
+      padding: 0 14px 16px;
+    }
+
+    .experience-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .experience-title::before,
+    .experience-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .2s;
+      position: relative;
+    }
+
+    .option-card.active {
+      border-color: var(--navy);
+    }
+
+    .option-card.bestseller {
+      border-color: var(--gold);
+    }
+
+    .bestseller-tag {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: var(--gold);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      text-align: center;
+      padding: 3px;
+      letter-spacing: .5px;
+    }
+
+    /* OPTION IMAGE PH — troque por <img src="images/biblia-opt.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;"> */
+    .option-img-ph {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #f5f2ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-top: 18px;
+    }
+
+    .option-body {
+      padding: 10px;
+    }
+
+    .option-name {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .option-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .option-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .option-price-old {
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: line-through;
+      display: block;
+    }
+
+    .option-frete {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--green);
+      margin-top: 2px;
+    }
+
+    .stock-warning {
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stock-warning span { color: var(--muted); font-size: 11px; }
+
+    /* ══ BOTÃO COMPRAR ══ */
+    .buy-section {
+      padding: 0 14px 14px;
+    }
+
+    /* Troque o href pelo link real do checkout */
+    .btn-buy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 52px;
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: background .2s;
+      text-decoration: none;
+    }
+
+    .btn-buy:hover { background: var(--navy-light); }
+
+    .delivery-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .guarantee-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--navy);
+      font-weight: 700;
+      margin-top: 6px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ══ ACCORDION ══ */
+    .accordion-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      padding: 14px;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      gap: 10px;
+    }
+
+    .accordion-arrow {
+      font-size: 16px;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 14px 14px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-item.open .accordion-body { display: block; }
+
+    /* ══ SECAO DESTAQUE ══ */
+    .highlight-section {
+      background: var(--white);
+      padding: 24px 14px;
+      text-align: center;
+      border-top: 8px solid var(--cream);
+    }
+
+    .hl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .hl-sub {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* FOTO FREI — troque por <img src="images/frei-gilson.jpg" style="width:100%;border-radius:6px;"> */
+    .frei-img-ph {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f0ede8;
+      border-radius: var(--radius);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 6px;
+      border: 2px dashed #ddd;
+      margin-bottom: 16px;
+    }
+    .frei-img-ph .fi-icon { font-size: 40px; opacity: .3; }
+    .frei-img-ph .fi-text { font-size: 11px; color: #bbb; font-weight: 700; }
+
+    .hl-body {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    /* ══ CAROUSEL FEATURES ══ */
+    .features-section {
+      border-top: 8px solid var(--cream);
+      background: var(--white);
+      padding: 24px 0;
+    }
+
+    .features-track-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .features-track {
+      display: flex;
+      transition: transform .4s ease;
+    }
+
+    .feature-slide {
+      min-width: 100%;
+      padding: 0 14px;
+      text-align: center;
+    }
+
+    /* FEATURE IMG PH */
+    .feat-img-ph {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f5f2ec;
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      margin-bottom: 14px;
+      border: 2px dashed #ddd;
+    }
+
+    .feat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .feat-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .feat-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .feat-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .feat-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .feat-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .feat-dot.active { background: var(--navy); }
+
+    /* ══ QUOTE GRANDE ══ */
+    .big-quote {
+      background: var(--cream);
+      padding: 28px 20px;
+      text-align: center;
+      border-top: 8px solid var(--white);
+    }
+
+    .big-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .big-quote-body {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    /* ══ FAQ ══ */
+    .faq-section {
+      background: var(--white);
+      border-top: 8px solid var(--cream);
+    }
+
+    .faq-header {
+      padding: 20px 14px 4px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ══ AVALIAÇÕES ══ */
+    .reviews-section {
+      background: var(--white);
+      border-top: 8px solid var(--cream);
+    }
+
+    .reviews-header {
+      padding: 20px 14px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reviews-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .rating-summary {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .rating-big {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .rating-num {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .rating-big .stars { justify-content: center; margin: 4px 0 2px; }
+
+    .rating-count {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .rating-bars {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bar-label {
+      font-size: 11px;
+      color: var(--muted);
+      width: 24px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: #f0ede8;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 99px;
+    }
+
+    .bar-num {
+      font-size: 11px;
+      color: var(--muted);
+      width: 20px;
+      flex-shrink: 0;
+    }
+
+    .rate-btn {
+      display: block;
+      width: 100%;
+      margin: 14px 0 0;
+      padding: 10px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* REVIEW ITEM */
+    .review-item {
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .review-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .review-meta { flex: 1; }
+
+    .review-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 1px;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    .review-photos {
+      display: flex;
+      gap: 6px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    /* REVIEW PHOTO PH */
+    .review-photo-ph {
+      width: 72px; height: 72px;
+      border-radius: 4px;
+      background: #f5f2ec;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .review-text {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .reply-box {
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .reply-logo {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .reply-content { flex: 1; }
+
+    .reply-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .reply-text {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .reply-more {
+      font-size: 11px;
+      color: var(--navy);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ══ ENVIO ══ */
+    .shipping-feature {
+      background: var(--white);
+      border-top: 8px solid var(--cream);
+      padding: 28px 14px;
+      text-align: center;
+    }
+
+    .ship-icon { font-size: 36px; margin-bottom: 10px; }
+
+    .ship-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .ship-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ══ FOOTER ══ */
+    .footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.8);
+      padding: 28px 16px 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 4px;
+    }
+
+    .footer-email {
+      font-size: 12px;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .footer-hours {
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 20px;
+    }
+
+    .footer-section { margin-bottom: 18px; }
+
+    .footer-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      cursor: pointer;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,.1);
+      margin: 20px 0;
+    }
+
+    .payment-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pay-icon {
+      background: rgba(255,255,255,.12);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,.8);
+      letter-spacing: .3px;
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* ══ STICKY BUY ══ */
+    .sticky-buy {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 300;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .sticky-price {
+      flex: 1;
+    }
+
+    .sticky-price .sp-main {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .sticky-price .sp-old {
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    /* Troque o href pelo link real */
+    .sticky-btn {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      border-radius: var(--radius);
+      padding: 13px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    /* utils */
+    .spacer-8 { height: 8px; background: var(--cream); }
+  </style>
+</head>
+<body>
+
+  <!-- CUPOM -->
+  <div class="coupon-bar">
+    CUPOM: <strong>"BEMVINDO"</strong> PRIMEIRA COMPRA
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="hamburger">☰</div>
+    <!-- Troque a div logo-ph por: <img src="images/logo.png" style="height:32px;"> -->
+    <div class="logo-ph">
+      <div class="logo-icon">✟</div>
+      Artes da Fé
+    </div>
+    <div class="cart-icon">🛍️</div>
+  </header>
+
+  <div class="product-wrap">
+
+    <!-- CARROSSEL -->
+    <div class="carousel">
+      <div class="carousel-track" id="main-track">
+        <div class="carousel-slide">
+          <!-- Troque por: <img src="images/biblia-1.jpg" style="width:100%;height:100%;object-fit:contain;padding:20px;"> -->
+          <div class="slide-ph"><div class="sn">1</div><div class="sl">biblia-1.jpg</div></div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph"><div class="sn">2</div><div class="sl">biblia-2.jpg</div></div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph"><div class="sn">3</div><div class="sl">biblia-3.jpg</div></div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph"><div class="sn">4</div><div class="sl">biblia-4.jpg</div></div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph"><div class="sn">5</div><div class="sl">biblia-5.jpg</div></div>
+        </div>
+      </div>
+      <button class="carousel-btn prev" onclick="mainSlide(-1)">❮</button>
+      <button class="carousel-btn next" onclick="mainSlide(1)">❯</button>
+    </div>
+
+    <!-- THUMBS -->
+    <div class="thumbs" id="thumbs-wrap">
+      <div class="thumb active" onclick="mainGoTo(0)">1</div>
+      <div class="thumb" onclick="mainGoTo(1)">2</div>
+      <div class="thumb" onclick="mainGoTo(2)">3</div>
+      <div class="thumb" onclick="mainGoTo(3)">4</div>
+      <div class="thumb" onclick="mainGoTo(4)">5</div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info">
+      <div class="rating-row">
+        <div class="rating-group">
+          <div class="rating-label">Classificação (4.9)</div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="rating-divider"></div>
+        <div class="satisfied-group">
+          <div class="satisfied-num">41</div>
+          <div class="satisfied-label">Clientes Satisfeitos</div>
+        </div>
+      </div>
+
+      <div class="demand-badge">🔥 ALTA DEMANDA</div>
+
+      <h1 class="product-title">Bíblia Utilizada por Frei Gilson no Rosário da Madrugada | Edição Ave-Maria</h1>
+
+      <div class="product-subtitle">
+        🙏 Ideal para leitura diária, oração e momentos de conexão com Deus
+      </div>
+    </div>
+
+    <!-- PREÇO -->
+    <div class="price-section">
+      <div class="economy-tag">🏷️ <span id="price-nome">Bíblia Individual</span></div>
+      <div class="price-row">
+        <!-- PREÇO PRINCIPAL — só mude os valores aqui -->
+        <span class="price-main" id="price-main">R$ 159,90</span>
+        <span class="price-old" id="price-old">R$ 239,90</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div class="pix-tag">💚 5% OFF no Pix</div>
+        <div class="pix-tag" id="frete-tag" style="display:none;background:#e8f5e9;color:#2e7d5e;">🚚 FRETE GRÁTIS</div>
+      </div>
+    </div>
+
+    <div style="padding:0 14px;">
+      <div class="quote-box">
+        "Tenha em mãos a mesma Bíblia usada em momentos profundos de oração e fortaleça sua fé todos os dias.
+      </div>
+    </div>
+
+    <!-- ESCOLHA EXPERIÊNCIA -->
+    <div class="experience-section">
+      <div class="experience-title">Escolha sua Experiência</div>
+      <div class="options-grid">
+
+        <div class="option-card active" onclick="selectOption(this, 'individual')" style="cursor:pointer;">
+          <!-- Troque por: <img src="images/biblia-individual.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;"> -->
+          <div class="option-img-ph">📖</div>
+          <div class="option-body">
+            <div class="option-name">Bíblia Individual</div>
+            <div class="option-desc">Para quem deseja apenas a leitura</div>
+            <!-- PREÇO — mude aqui -->
+            <div class="option-price">R$ 159,90</div>
+            <div class="option-price-old">R$ 239,90</div>
+          </div>
+        </div>
+
+        <div class="option-card bestseller" onclick="selectOption(this, 'kit')" style="cursor:pointer;">
+          <div class="bestseller-tag">MAIS VENDIDO</div>
+          <!-- Troque por: <img src="images/kit-completo.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;margin-top:18px;"> -->
+          <div class="option-img-ph" style="margin-top:18px;">🎁</div>
+          <div class="option-body">
+            <div class="option-name">Kit Completo de Oração</div>
+            <div class="option-desc">Bíblia + Terço + Marca-Textos Para sua Oração Diária</div>
+            <!-- PREÇO KIT — mude aqui -->
+            <div class="option-price">R$ 197,90</div>
+            <div class="option-price-old">R$ 319,90</div>
+            <div class="option-frete">✓ FRETE GRÁTIS</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="stock-warning">
+        🟠 Estoque baixo: <strong id="stock-num">8</strong> restante(s)
+        <span>— *Oferta válida enquanto durar o estoque</span>
+      </div>
+    </div>
+
+    <!-- BOTÃO COMPRAR -->
+    <div class="buy-section">
+      <!-- Troque o href pelo link real do checkout -->
+      <a href="#" class="btn-buy">ADICIONAR AO CARRINHO</a>
+      <div class="delivery-row">📅 Receba Entre: <strong>7. Maio – 12. Maio.</strong></div>
+      <div class="guarantee-row">🛡️ Garantia de 90 Dias</div>
+    </div>
+
+    <!-- ACCORDION DESCRICAO/SPECS -->
+    <div class="accordion-section">
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">
+          Descrição <span class="accordion-arrow">∨</span>
+        </button>
+        <div class="accordion-body">
+          A Bíblia Sagrada Ave-Maria é a mesma edição utilizada por Frei Gilson no Rosário da Madrugada. Com capa Eucaristia em couro sintético delicado, marcações laterais para fácil navegação e letra em tamanho legível. Perfeita para oração diária, leitura e meditação da Palavra.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">
+          Especificações <span class="accordion-arrow">∨</span>
+        </button>
+        <div class="accordion-body">
+          <strong>Editora:</strong> Ave-Maria<br>
+          <strong>Encadernação:</strong> Capa dura em couro sintético<br>
+          <strong>Destaques:</strong> Índices laterais, marcações coloridas<br>
+          <strong>Idioma:</strong> Português<br>
+          <strong>Garantia:</strong> 90 dias
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /product-wrap -->
+
+  <!-- DESTAQUE FREI GILSON -->
+  <div class="highlight-section">
+    <div class="hl-title">Reze com a Bíblia que Acompanha Frei Gilson no Rosário da Madrugada</div>
+    <div class="hl-sub">Uma edição especial para leitura, oração e momentos com Deus todos os dias</div>
+    <!-- Troque por: <img src="images/frei-gilson.jpg" style="width:100%;border-radius:6px;margin-bottom:16px;"> -->
+    <div class="frei-img-ph">
+      <div class="fi-icon">📷</div>
+      <div class="fi-text">frei-gilson.jpg</div>
+    </div>
+    <div class="hl-body">
+      <strong>A Bíblia que Ganhou Destaque Entre os Fiéis</strong><br><br>
+      Com capa Eucaristia e marcações laterais, esta Bíblia se tornou referência entre fiéis que acompanham o Rosário da Madrugada e desejam uma leitura mais prática no dia a dia.
+    </div>
+  </div>
+
+  <!-- FEATURES CAROUSEL -->
+  <div class="features-section">
+    <div class="features-track-wrap">
+      <div class="features-track" id="feat-track">
+        <div class="feature-slide">
+          <div class="feat-img-ph">📑</div>
+          <div class="feat-title">Encontre Tudo com Facilidade</div>
+          <div class="feat-desc">Os índices laterais tornam a leitura mais prática, ajudando você a abrir direto no livro que precisa, sem perder tempo.</div>
+        </div>
+        <div class="feature-slide">
+          <div class="feat-img-ph">✝️</div>
+          <div class="feat-title">Capa Eucaristia Exclusiva</div>
+          <div class="feat-desc">Design inspirado na Eucaristia, em couro sintético delicado. Uma Bíblia que transmite paz e espiritualidade antes mesmo de abrir.</div>
+        </div>
+        <div class="feature-slide">
+          <div class="feat-img-ph">🙏</div>
+          <div class="feat-title">Perfeita para a Oração Diária</div>
+          <div class="feat-desc">Letra de tamanho confortável, papel de qualidade. Companheira ideal para o Rosário da Madrugada e a meditação cotidiana.</div>
+        </div>
+      </div>
+    </div>
+    <div class="feat-nav">
+      <button class="feat-btn" onclick="featSlide(-1)">❮</button>
+      <div class="feat-dots" id="feat-dots">
+        <div class="feat-dot active"></div>
+        <div class="feat-dot"></div>
+        <div class="feat-dot"></div>
+      </div>
+      <button class="feat-btn" onclick="featSlide(1)">❯</button>
+    </div>
+  </div>
+
+  <!-- QUOTE GRANDE -->
+  <div class="big-quote">
+    <div class="big-quote-text">"Uma Bíblia para Acompanhar seus Momentos com Deus Todos os Dias."</div>
+    <div class="big-quote-body">
+      Com a mesma edição utilizada por Frei Gilson no Rosário da Madrugada, você leva para casa uma Bíblia feita para oração, leitura diária e meditação da Palavra.<br><br>
+      Na versão Kit Completo, a experiência fica ainda mais especial: Bíblia, terço, marca-textos e caixa presenteável para viver ou presentear com mais significado.<br><br>
+      Escolha sua versão <strong>e deixe a Palavra de Deus mais presente na sua rotina.</strong>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="faq-header">Perguntas Frequentes</div>
+    <div class="accordion-section">
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">1. Essa é realmente a Bíblia utilizada por Frei Gilson? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Sim! É a mesma edição Ave-Maria que Frei Gilson utiliza durante o Rosário da Madrugada.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">2. Qual a diferença entre a Bíblia Individual e o Kit Completo? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">A Bíblia Individual é somente o livro. O Kit Completo inclui a Bíblia + terço + marca-textos + caixa presenteável.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">3. O Kit Completo vale mais a pena? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Para quem quer presentear ou ter uma experiência completa de oração, sim. Além disso, o Kit já inclui frete grátis.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">4. A Bíblia é boa para usar todos os dias? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Sim, foi feita exatamente pra isso. Capa resistente, papel de qualidade e índices laterais pra facilitar o uso diário.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">5. O que vem dentro da Bíblia? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">A Bíblia completa com Antigo e Novo Testamento, índices laterais coloridos e capa em couro sintético com design Eucaristia.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">6. A caixa presenteável vem junto no Kit Completo? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Sim! A caixa presenteável é incluída no Kit Completo, perfeita para dar de presente.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">9. É uma boa opção para presente? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Com certeza. Muitos clientes compram como presente e o retorno é sempre muito positivo, especialmente o Kit Completo.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAcc(this)">10. E se eu não gostar quando chegar? <span class="accordion-arrow">∨</span></button>
+        <div class="accordion-body">Você tem 90 dias de garantia. Se não ficar satisfeito por qualquer motivo, é só entrar em contato e resolvemos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVALIAÇÕES -->
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <div class="reviews-title">Avaliações</div>
+      <div class="rating-summary">
+        <div class="rating-big">
+          <div class="rating-num">4.9</div>
+          <div class="stars">★★★★★</div>
+          <div class="rating-count">41 avaliações</div>
+        </div>
+        <div class="rating-bars">
+          <div class="bar-row"><span class="bar-label">5★</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="bar-num">38</span></div>
+          <div class="bar-row"><span class="bar-label">4★</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span class="bar-num">2</span></div>
+          <div class="bar-row"><span class="bar-label">3★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-num">1</span></div>
+          <div class="bar-row"><span class="bar-label">2★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-num">0</span></div>
+          <div class="bar-row"><span class="bar-label">1★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-num">0</span></div>
+        </div>
+      </div>
+      <button class="rate-btn">☆ ☆ ☆ ☆ ☆ &nbsp; Clique para avaliar</button>
+    </div>
+
+    <!-- REVIEW 1 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#7c6f9e;">VB</div>
+        <div class="review-meta">
+          <div class="review-name">Vanderléia Braga <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Chegou no prazo, embalagem intacta e a Bíblia é linda de verdade.</div>
+      <div class="reply-box">
+        <div class="reply-logo">A</div>
+        <div class="reply-content">
+          <div class="reply-name">Artes da Fé respondeu</div>
+          <div class="reply-text">Que ótimo, Que bom saber que chegou tudo certinho! A Bíblia do Frei Gilson merece chegar perfeita. Obrigada pela confiança e que a Palavra d...</div>
+          <span class="reply-more">Ver mais</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW 2 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#5a8a6e;">GR</div>
+        <div class="review-meta">
+          <div class="review-name">Gercilene Rocha <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Comprei de presente e minha irmã ficou encantada. Qualidade que impressiona, apresentação impecável.</div>
+      <div class="reply-box">
+        <div class="reply-logo">A</div>
+        <div class="reply-content">
+          <div class="reply-name">Artes da Fé respondeu</div>
+          <div class="reply-text">Que presente cheio de significado! Fico feliz que sua irmã ficou encantada, ela merecia receber algo assim. Que a Palavra de Deus fortaleça ela tod...</div>
+          <span class="reply-more">Ver mais</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW 3 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#8a6e5a;">ZF</div>
+        <div class="review-meta">
+          <div class="review-name">Zenaide Ferreira <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Abri e fiquei sem palavra. A capa, o papel, os detalhes. Não esperava tanta qualidade numa Bíblia comprada pela internet.</div>
+      <div class="reply-box">
+        <div class="reply-logo">A</div>
+        <div class="reply-content">
+          <div class="reply-name">Artes da Fé respondeu</div>
+          <div class="reply-text">Esse silêncio na hora de abrir é o melhor retorno que podemos receber! A edição Ave Maria foi escolhida exatamente por esse nível de qualidade...</div>
+          <span class="reply-more">Ver mais</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW 4 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#5a6e8a;">JB</div>
+        <div class="review-meta">
+          <div class="review-name">Jurema Bastos <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+        <div class="review-photo-ph">🖼️</div>
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Essa bíblia é a coisa mais linda!! Eu amei! Obrigada artes da fé pelo ótimo atendimento.</div>
+      <div class="reply-box">
+        <div class="reply-logo">A</div>
+        <div class="reply-content">
+          <div class="reply-name">Artes da Fé respondeu</div>
+          <div class="reply-text">Jurema, que alegria receber esse carinho! Fico muito feliz que a Bíblia te encantou assim. Cuidar bem de cada cliente é o que nos move. Que a...</div>
+          <span class="reply-more">Ver mais</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW 5 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#9e7c6f;">CP</div>
+        <div class="review-meta">
+          <div class="review-name">Clodomira Pinto <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Apaixonada, tamanho bom, letras visíveis e acabamento perfeito.</div>
+    </div>
+
+    <!-- REVIEW 6 -->
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#6e8a7c;">NS</div>
+        <div class="review-meta">
+          <div class="review-name">Nadirene Souza <span class="verified-badge">✓ Verificado</span></div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-photos">
+        <div class="review-photo-ph">🖼️</div>
+      </div>
+      <div class="review-text">Amei a Bíblia, ela é linda demais, a capa é tipo courino delicado, as letras tamanho ótimo, recomendo, fiquei muito feliz com minha...</div>
+      <div class="reply-box">
+        <div class="reply-logo">A</div>
+        <div class="reply-content">
+          <div class="reply-name">Artes da Fé respondeu</div>
+          <div class="reply-text">Nadirene, que alegria! Cada detalhe foi pensado com cuidado mesmo. Que essa Bíblia te acompanhe por muitos anos! 🙏</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ENVIO NACIONAL -->
+  <div class="shipping-feature">
+    <div class="ship-icon">🚚</div>
+    <div class="ship-title">Envio Nacional</div>
+    <div class="ship-desc">Entregamos para todas as regiões do Brasil com os Correios®</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span>✟</span> Artes da Fé — Vestes e Acessórios
+    </div>
+    <div class="footer-tagline">Vestindo a fé com propósito.</div>
+    <div class="footer-email">suporte@artesdafe.com</div>
+    <div class="footer-hours">Segunda a sexta, das 9h às 17h</div>
+
+    <div class="footer-section">
+      <div class="footer-title">Políticas</div>
+      <div class="footer-links">
+        <span class="footer-link">Garantia e Devolução</span>
+        <span class="footer-link">Pagamento e Envio</span>
+        <span class="footer-link">Privacidade e Segurança</span>
+        <span class="footer-link">Termos e Serviços</span>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Institucional</div>
+      <div class="footer-links">
+        <span class="footer-link">Sobre Nós</span>
+        <span class="footer-link">Perguntas Frequentes</span>
+        <span class="footer-link">Entrar em Contato</span>
+        <span class="footer-link">Cookies</span>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="payment-icons">
+      <span class="pay-icon">PIX</span>
+      <span class="pay-icon">AMEX</span>
+      <span class="pay-icon">MASTER</span>
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">ELO</span>
+      <span class="pay-icon">HIPERCARD</span>
+    </div>
+
+    <div class="footer-copy">
+      © 2026, SANTA FE ARTE SACRA LTDA Todos os Direitos Reservados<br>
+      CNPJ: 34.677.702/0001-26 Rua Siqueira Campos, 278, Centro,<br>
+      São José dos Campos, SP – CEP: 12210-250
+    </div>
+  </footer>
+
+  <!-- STICKY COMPRAR -->
+  <div class="sticky-buy">
+    <div class="sticky-price">
+      <!-- PREÇO STICKY — mude aqui também -->
+      <div class="sp-old" id="sticky-old">R$ 239,90</div>
+      <div class="sp-main" id="sticky-main">R$ 159,90</div>
+    </div>
+    <!-- Troque o href pelo link real -->
+    <a href="#" class="sticky-btn">ADICIONAR AO CARRINHO</a>
+  </div>
+
+  <script>
+    // ── CARROSSEL PRINCIPAL ──
+    let mainCur = 0;
+    const mainTotal = 5;
+
+    function mainSlide(dir) {
+      mainCur = (mainCur + dir + mainTotal) % mainTotal;
+      mainUpdateUI();
+    }
+
+    function mainGoTo(i) {
+      mainCur = i;
+      mainUpdateUI();
+    }
+
+    function mainUpdateUI() {
+      document.getElementById('main-track').style.transform = `translateX(-${mainCur * 100}%)`;
+      document.querySelectorAll('.thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === mainCur);
+      });
+    }
+
+    setInterval(() => mainSlide(1), 4000);
+
+    // ── FEATURES CAROUSEL ──
+    let featCur = 0;
+    const featTotal = 3;
+
+    function featSlide(dir) {
+      featCur = (featCur + dir + featTotal) % featTotal;
+      document.getElementById('feat-track').style.transform = `translateX(-${featCur * 100}%)`;
+      document.querySelectorAll('.feat-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === featCur);
+      });
+    }
+
+    // ── ACCORDION ──
+    function toggleAcc(btn) {
+      const item = btn.closest('.accordion-item');
+      item.classList.toggle('open');
+    }
+
+    // ── SELECIONAR OPÇÃO ──
+    const produtos = {
+      individual: {
+        nome: 'Bíblia Individual',
+        preco: 'R$ 159,90',
+        precoOld: 'R$ 239,90',
+        frete: false,
+      },
+      kit: {
+        nome: 'Kit Completo de Oração',
+        preco: 'R$ 197,90',
+        precoOld: 'R$ 319,90',
+        frete: true,
+      }
+    };
+
+    function selectOption(card, tipo) {
+      document.querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      const p = produtos[tipo];
+
+      // Atualiza bloco de preço principal
+      document.getElementById('price-main').textContent = p.preco;
+      document.getElementById('price-old').textContent = p.precoOld;
+      document.getElementById('price-nome').textContent = p.nome;
+
+      // Atualiza sticky
+      document.getElementById('sticky-main').textContent = p.preco;
+      document.getElementById('sticky-old').textContent = p.precoOld;
+
+      // Frete grátis
+      const freteTag = document.getElementById('frete-tag');
+      freteTag.style.display = p.frete ? 'inline-flex' : 'none';
+
+      // Animação rápida no preço
+      const el = document.getElementById('price-main');
+      el.style.transform = 'scale(1.12)';
+      el.style.transition = 'transform .15s ease';
+      setTimeout(() => { el.style.transform = 'scale(1)'; }, 150);
+    }
+
+    // ── ESTOQUE ──
+    let stock = 8;
+    setInterval(() => {
+      if (stock > 1) {
+        stock--;
+        document.getElementById('stock-num').textContent = stock;
+      }
+    }, 12000);
+  </script>
+
+</body>
+</html>
